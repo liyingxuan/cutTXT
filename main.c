@@ -1,24 +1,24 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
 #include <string.h>
 
-/*È«¾Ö½á¹¹ÌåÊý×é*/
+/*å…¨å±€ç»“æž„ä½“æ•°ç»„*/
 struct NameListStruct
 {
 	char Name[100];	
 }List[100];
 
-/*º¯ÊýÉêÃ÷*/
-void Show(void);//ÏÔÊ¾Ò»Ð©ÌØ¶¨ÐÅÏ¢
-int ReadFileList(void);//¶ÁÈ¡exeÎÄ¼þËùÔÚÄ¿Â¼µÄÎÄ¼þÁÐ±í£¬²¢É¸Ñ¡³ötxtÎÄµµ£¬·ÅÈëÈ«¾ÖµÄ½á¹¹ÌåÊý×éÖÐ
-void PrintFileList(int row);//txtÎÄµµÁÐ±í
-int ReScanf(int min,int max);//ÊäÈëÑ¡Ôñ£¬´íÎóºóÑ­»·ÌáÊ¾£¬Ö±ÖÁÊäÈëÕýÈ·
+/*å‡½æ•°ç”³æ˜Ž*/
+void Show(void);//æ˜¾ç¤ºä¸€äº›ç‰¹å®šä¿¡æ¯
+int ReadFileList(void);//è¯»å–exeæ–‡ä»¶æ‰€åœ¨ç›®å½•çš„æ–‡ä»¶åˆ—è¡¨ï¼Œå¹¶ç­›é€‰å‡ºtxtæ–‡æ¡£ï¼Œæ”¾å…¥å…¨å±€çš„ç»“æž„ä½“æ•°ç»„ä¸­
+void PrintFileList(int row);//txtæ–‡æ¡£åˆ—è¡¨
+int ReScanf(int min,int max);//è¾“å…¥é€‰æ‹©ï¼Œé”™è¯¯åŽå¾ªçŽ¯æç¤ºï¼Œç›´è‡³è¾“å…¥æ­£ç¡®
 
 /**************************************************************************************************
-º¯ÊýÓÃÍ¾£ºmainº¯Êý£¬³ÌÐòÈë¿Ú£»¶ÁÈ¡txtÁÐ±í£¬²¢·Ö¸îÑ¡ÖÐµÄÎÄ¼þ
-ÊäÈë²ÎÊý£ºÎÞ
-·µ»Ø²ÎÊý£ºÎÞ
+å‡½æ•°ç”¨é€”ï¼šmainå‡½æ•°ï¼Œç¨‹åºå…¥å£ï¼›è¯»å–txtåˆ—è¡¨ï¼Œå¹¶åˆ†å‰²é€‰ä¸­çš„æ–‡ä»¶
+è¾“å…¥å‚æ•°ï¼šæ— 
+è¿”å›žå‚æ•°ï¼šæ— 
 */
 void main(void)
 {
@@ -28,84 +28,84 @@ void main(void)
 	long size;
 	char fileName_Suffix[100],fileName[100],fileNameTmp[100];
 
-	Show();//ÏÔÊ¾Ò»Ð©ÎÞ¹Ø½ôÒªµÄÐÅÏ¢
-	FileNum = ReadFileList();//¶ÁÈ¡txtÎÄ¼þÁÐ±í
-	PrintFileList(FileNum);//´òÓ¡txtÎÄ¼þÁÐ±í
+	Show();//æ˜¾ç¤ºä¸€äº›æ— å…³ç´§è¦çš„ä¿¡æ¯
+	FileNum = ReadFileList();//è¯»å–txtæ–‡ä»¶åˆ—è¡¨
+	PrintFileList(FileNum);//æ‰“å°txtæ–‡ä»¶åˆ—è¡¨
 
-	printf("\nÈç¹ûÁÐ±íÏÔÊ¾ÎÞÎó£¬ÇëÊäÈëÐèÒª·Ö¸îµÄÎÄ±¾ÎÄµµ£¨txtÎÄ¼þ£©Ç°µÄÐòºÅ: ");  //²Ëµ¥ÏÔÊ¾
-	select = ReScanf(1,FileNum);//ÊäÈëÐòºÅ
+	printf("\nå¦‚æžœåˆ—è¡¨æ˜¾ç¤ºæ— è¯¯ï¼Œè¯·è¾“å…¥éœ€è¦åˆ†å‰²çš„æ–‡æœ¬æ–‡æ¡£ï¼ˆtxtæ–‡ä»¶ï¼‰å‰çš„åºå·: ");  //èœå•æ˜¾ç¤º
+	select = ReScanf(1,FileNum);//è¾“å…¥åºå·
 
-	/* ÏÂÃæÎåÐÐÄÚÈÝ£¬ÓÃÓÚ·Ö±ðÈ¥³ý×Ö·û´®ÖÐ×îºóÒ»¸ö»Ø³µºÍºó×ºÃû */
+	/* ä¸‹é¢äº”è¡Œå†…å®¹ï¼Œç”¨äºŽåˆ†åˆ«åŽ»é™¤å­—ç¬¦ä¸²ä¸­æœ€åŽä¸€ä¸ªå›žè½¦å’ŒåŽç¼€å */
 	strcpy(fileName_Suffix,List[select].Name);
 	j = strlen(fileName_Suffix)-1;
-	fileName_Suffix[j] = '\0';//×Ö·ûÓÃµ¥ÒýºÅ£¬È¥µô×îºóÒ»¸ö»Ø³µ
+	fileName_Suffix[j] = '\0';//å­—ç¬¦ç”¨å•å¼•å·ï¼ŒåŽ»æŽ‰æœ€åŽä¸€ä¸ªå›žè½¦
 	strcpy(fileName,fileName_Suffix);
-	fileName[j-4] = '\0';//½«ÎÄ¼þÃûÈ¥³ýºó×º
+	fileName[j-4] = '\0';//å°†æ–‡ä»¶ååŽ»é™¤åŽç¼€
 
-	printf("\nÄãÑ¡ÔñµÄÊÇ:¡°%s¡±£¬",fileName_Suffix);
-	if( ( fpSrc = fopen(fileName_Suffix,"r" ) ) == 0 )//ÅÐ¶ÏÊÇ·ñÓÐÎÄ¼þ
+	printf("\nä½ é€‰æ‹©çš„æ˜¯:â€œ%sâ€ï¼Œ",fileName_Suffix);
+	if( ( fpSrc = fopen(fileName_Suffix,"r" ) ) == 0 )//åˆ¤æ–­æ˜¯å¦æœ‰æ–‡ä»¶
 	{
-		printf("\n\n¶Ô²»Æð£¬ÎÄ¼þÄ¾ÓÐÕÒµ½»ò´ò²»¿ª°¡£¡³ÌÐòÍË³ö£¡\n");
-		system("pause");//ÈÎÒâ¼ü¼ÌÐø
+		printf("\n\nå¯¹ä¸èµ·ï¼Œæ–‡ä»¶æœ¨æœ‰æ‰¾åˆ°æˆ–æ‰“ä¸å¼€å•Šï¼ç¨‹åºé€€å‡ºï¼\n");
+		system("pause");//ä»»æ„é”®ç»§ç»­
 		exit(1);
 	}
 
-	fseek(fpSrc, 0L,SEEK_END);//½«Ö¸ÕëÒÆ¶¯µ½Ä©Î»
-	size = ftell(fpSrc);//¼ÆËãÎÄ¼þ³¤¶È£¬Ä¿Ç°Ö¸ÕëµÄÎ»ÖÃ¼ÈÊÇÎÄ¼þµÄ³¤¶È
+	fseek(fpSrc, 0L,SEEK_END);//å°†æŒ‡é’ˆç§»åŠ¨åˆ°æœ«ä½
+	size = ftell(fpSrc);//è®¡ç®—æ–‡ä»¶é•¿åº¦ï¼Œç›®å‰æŒ‡é’ˆçš„ä½ç½®æ—¢æ˜¯æ–‡ä»¶çš„é•¿åº¦
 	if( size < 10000)
 	{
-		printf("Õâ¸öÎÄ¼þ³¤¶ÈÎª£º¡°%ld¡±×Ö½Ú¡£\nÁ¬10000×Ö½Ú¶¼²»µ½£¬·Ö¸öÃ«Ïß°¡£¬×Ô¼ºÊÖ¶¯·Ö¸îÈ¥¡£³ÌÐòÍË³ö£¡\n",size);
-		system("pause");//ÈÎÒâ¼ü¼ÌÐø
+		printf("è¿™ä¸ªæ–‡ä»¶é•¿åº¦ä¸ºï¼šâ€œ%ldâ€å­—èŠ‚ã€‚\nè¿ž10000å­—èŠ‚éƒ½ä¸åˆ°ï¼Œåˆ†ä¸ªæ¯›çº¿å•Šï¼Œè‡ªå·±æ‰‹åŠ¨åˆ†å‰²åŽ»ã€‚ç¨‹åºé€€å‡ºï¼\n",size);
+		system("pause");//ä»»æ„é”®ç»§ç»­
 		exit(0);
 	}
-	printf("Õâ¸öÎÄ¼þ³¤¶ÈÎª£º%ld×Ö½Ú¡£\nÆÚÍûÆ½¾ù·Ö¸î³É¼¸¸öÎÄ¼þ£¿ÇëÊäÈëÐ¡ÓÚ99µÄÊýÖµ£º",size);
-	select = ReScanf(2,99);//ÊäÈë·Ö¸î³É¼¸¶ÎµÄÊýÖµ
+	printf("è¿™ä¸ªæ–‡ä»¶é•¿åº¦ä¸ºï¼š%ldå­—èŠ‚ã€‚\næœŸæœ›å¹³å‡åˆ†å‰²æˆå‡ ä¸ªæ–‡ä»¶ï¼Ÿè¯·è¾“å…¥å°äºŽ99çš„æ•°å€¼ï¼š",size);
+	select = ReScanf(2,99);//è¾“å…¥åˆ†å‰²æˆå‡ æ®µçš„æ•°å€¼
 
-	singleFileSize = size/select;//¼ÆËãÃ¿¸öÐ¡ÎÄ¼þ´óÐ¡
-	printf("\nÏÂÃæ½«»á°Ñ¡°%s¡±·Ö¸î³É%d¸ö´óÐ¡Îª£º%d×Ö½Ú£¨%dKB£©µÄÎÄ¼þ¡£\n\n",fileName_Suffix,select,singleFileSize,singleFileSize/1024);
-	system("pause");//ÈÎÒâ¼ü¼ÌÐø
+	singleFileSize = size/select;//è®¡ç®—æ¯ä¸ªå°æ–‡ä»¶å¤§å°
+	printf("\nä¸‹é¢å°†ä¼šæŠŠâ€œ%sâ€åˆ†å‰²æˆ%dä¸ªå¤§å°ä¸ºï¼š%då­—èŠ‚ï¼ˆ%dKBï¼‰çš„æ–‡ä»¶ã€‚\n\n",fileName_Suffix,select,singleFileSize,singleFileSize/1024);
+	system("pause");//ä»»æ„é”®ç»§ç»­
 
-	fseek(fpSrc, 0L,SEEK_SET);//½«Ö¸ÕëÒÆ¶¯µ½Ê×Î»
+	fseek(fpSrc, 0L,SEEK_SET);//å°†æŒ‡é’ˆç§»åŠ¨åˆ°é¦–ä½
 	for(i = 1 ; i<=select ; i++ )
 	{
-		buff = (unsigned char*)malloc(singleFileSize);//¶¯Ì¬ÉêÇëµ¥¸öÐ¡ÎÄ¼þ´óÐ¡ËùÐèµÄÄÚ´æ
-		sprintf(fileNameTmp,"%s - µÚ%02d¶Î.txt",fileName,i);//ÎÄ¼þÃûÆ´½Ó
-		fread(buff,singleFileSize,1,fpSrc);//´ÓfpSrcÖÐ¶ÁÈ¡Êý¾Ýµ½buff
-		fpDec = fopen(fileNameTmp,"w");//ÐÂ½¨Ð¡ÎÄ¼þ
-		fwrite(buff,singleFileSize,1,fpDec);//½«buffÊý¾ÝÐ´Èëµ½fpDec
-		free(buff);//ÊÍ·ÅÄÚ´æ
-		fclose(fpDec);//¹Ø±ÕÄ¿±êÎÄ¼þ
-		printf("\n¡°%s¡±ÒÑ³É¹¦Éú³É£¡",fileNameTmp);
+		buff = (unsigned char*)malloc(singleFileSize);//åŠ¨æ€ç”³è¯·å•ä¸ªå°æ–‡ä»¶å¤§å°æ‰€éœ€çš„å†…å­˜
+		sprintf(fileNameTmp,"%s - ç¬¬%02dæ®µ.txt",fileName,i);//æ–‡ä»¶åæ‹¼æŽ¥
+		fread(buff,singleFileSize,1,fpSrc);//ä»ŽfpSrcä¸­è¯»å–æ•°æ®åˆ°buff
+		fpDec = fopen(fileNameTmp,"w");//æ–°å»ºå°æ–‡ä»¶
+		fwrite(buff,singleFileSize,1,fpDec);//å°†buffæ•°æ®å†™å…¥åˆ°fpDec
+		free(buff);//é‡Šæ”¾å†…å­˜
+		fclose(fpDec);//å…³é—­ç›®æ ‡æ–‡ä»¶
+		printf("\nâ€œ%sâ€å·²æˆåŠŸç”Ÿæˆï¼",fileNameTmp);
 	}
-	fclose(fpSrc);//¹Ø±ÕÔ´ÎÄ¼þ
+	fclose(fpSrc);//å…³é—­æºæ–‡ä»¶
 
-	printf("\n·Ö¸îÍê±Ï£¡³ÌÐòÍË³ö£¡");
-	system("pause");//ÈÎÒâ¼ü¼ÌÐø
+	printf("\nåˆ†å‰²å®Œæ¯•ï¼ç¨‹åºé€€å‡ºï¼");
+	system("pause");//ä»»æ„é”®ç»§ç»­
 	exit(0);
 }
 
 /**************************************************************************************************
-º¯ÊýÓÃÍ¾£ºÏÔÊ¾Ò»Ð©ÌØ¶¨ÐÅÏ¢
-ÊäÈë²ÎÊý£ºÎÞ
-·µ»Ø²ÎÊý£ºÎÞ
+å‡½æ•°ç”¨é€”ï¼šæ˜¾ç¤ºä¸€äº›ç‰¹å®šä¿¡æ¯
+è¾“å…¥å‚æ•°ï¼šæ— 
+è¿”å›žå‚æ•°ï¼šæ— 
 */
 void Show(void)
 {
-	system("color f0");//½«dos½çÃæÒÔ°×µ×ºÚ×ÖµÄÐÎÊ½À´ÏÔÊ¾
-	system("title ÎÄ±¾ÎÄµµ£¨txtÎÄ¼þ£©·Ö¸îÈí¼þ V1.0 Beta    mvp_xuan£¨QQÐ¡ËµÈº110684061ÈºÖ÷£©");//Ê¹dos½çÃæµÄÉÏ¿òÏÔÊ¾ÕâÌõÐÅÏ¢
+	system("color f0");//å°†dosç•Œé¢ä»¥ç™½åº•é»‘å­—çš„å½¢å¼æ¥æ˜¾ç¤º
+	system("title æ–‡æœ¬æ–‡æ¡£ï¼ˆtxtæ–‡ä»¶ï¼‰åˆ†å‰²è½¯ä»¶ V1.0 Beta    mvp_xuanï¼ˆQQå°è¯´ç¾¤110684061ç¾¤ä¸»ï¼‰");//ä½¿dosç•Œé¢çš„ä¸Šæ¡†æ˜¾ç¤ºè¿™æ¡ä¿¡æ¯
 
-	printf("¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª Èí ¼þ ÐÅ Ï¢ ¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª");
-	printf("\n    Ö÷Òª¹¦ÄÜ£ºÆ½¾ù·Ö¸îtxtÎÄµµ£¨10000×Ö½Ú£¬¼È9.7KBÒÔÉÏ£©¡£");
-	printf("\n    Ê¹ÓÃ·½·¨£º\n        1.ÔÚtxt´æ·ÅÄ¿Â¼ÏÂÔËÐÐ±¾³ÌÐò£¬³ÌÐò»á¶Á³öµ±Ç°Ä¿Â¼ÏÂËùÓÐtxtÎÄµµ²¢ÏÔÊ¾£»");
-	printf("\n        2.¸ù¾ÝÌáÊ¾Ñ¡ÔñÐèÒª·Ö¸îµÄÎÄµµÇ°µÄÐòºÅ£»\n        3.¸ù¾ÝÌáÊ¾ÊäÈë·Ö¸î³É¼¸¶Î¡£\n");
-	printf("\n    ÆäËû£ºÈçµÚÒ»´ÎÔËÐÐ±¨´í£¬ÔÙÔËÐÐÒ»´Î¼´¿É¡£É±¶¾Èí¼þÈÏÎªËüÊÇÄ¾ÂíÊ±£¬Ñ¡ÔñÐÅÈÎ¼´¿É¡£ÈçÓÐÆäËûÎÊÌâ£¬Çë¼ÓÈëµ½QQÈº£º110684061¡£\n");
-	printf("¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª\n\n");
+	printf("â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€” è½¯ ä»¶ ä¿¡ æ¯ â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”");
+	printf("\n    ä¸»è¦åŠŸèƒ½ï¼šå¹³å‡åˆ†å‰²txtæ–‡æ¡£ï¼ˆ10000å­—èŠ‚ï¼Œæ—¢9.7KBä»¥ä¸Šï¼‰ã€‚");
+	printf("\n    ä½¿ç”¨æ–¹æ³•ï¼š\n        1.åœ¨txtå­˜æ”¾ç›®å½•ä¸‹è¿è¡Œæœ¬ç¨‹åºï¼Œç¨‹åºä¼šè¯»å‡ºå½“å‰ç›®å½•ä¸‹æ‰€æœ‰txtæ–‡æ¡£å¹¶æ˜¾ç¤ºï¼›");
+	printf("\n        2.æ ¹æ®æç¤ºé€‰æ‹©éœ€è¦åˆ†å‰²çš„æ–‡æ¡£å‰çš„åºå·ï¼›\n        3.æ ¹æ®æç¤ºè¾“å…¥åˆ†å‰²æˆå‡ æ®µã€‚\n");
+	printf("\n    å…¶ä»–ï¼šå¦‚ç¬¬ä¸€æ¬¡è¿è¡ŒæŠ¥é”™ï¼Œå†è¿è¡Œä¸€æ¬¡å³å¯ã€‚æ€æ¯’è½¯ä»¶è®¤ä¸ºå®ƒæ˜¯æœ¨é©¬æ—¶ï¼Œé€‰æ‹©ä¿¡ä»»å³å¯ã€‚å¦‚æœ‰å…¶ä»–é—®é¢˜ï¼Œè¯·åŠ å…¥åˆ°QQç¾¤ï¼š110684061ã€‚\n");
+	printf("â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”\n\n");
 }
 
 /**************************************************************************************************
-º¯ÊýÓÃÍ¾£º¶ÁÈ¡exeÎÄ¼þËùÔÚÄ¿Â¼µÄÎÄ¼þÁÐ±í£¬²¢É¸Ñ¡³ötxtÎÄµµ£¬·ÅÈëÈ«¾ÖµÄ½á¹¹ÌåÊý×éÖÐ
-ÊäÈë²ÎÊý£ºÎÞ
-·µ»Ø²ÎÊý£ºtxtÎÄ¼þµÄÊýÁ¿Öµ
+å‡½æ•°ç”¨é€”ï¼šè¯»å–exeæ–‡ä»¶æ‰€åœ¨ç›®å½•çš„æ–‡ä»¶åˆ—è¡¨ï¼Œå¹¶ç­›é€‰å‡ºtxtæ–‡æ¡£ï¼Œæ”¾å…¥å…¨å±€çš„ç»“æž„ä½“æ•°ç»„ä¸­
+è¾“å…¥å‚æ•°ï¼šæ— 
+è¿”å›žå‚æ•°ï¼štxtæ–‡ä»¶çš„æ•°é‡å€¼
 */
 int ReadFileList(void)
 {
@@ -113,31 +113,31 @@ int ReadFileList(void)
 	int i = 0 ,row = 0;
 	char fileList[100][100];
 
-	system("DIR /B > TmpDirList.log");//½«ÎÄ¼þÁÐ±í¶ÁÈëµ½logÎÄ¼þÖÐ
+	system("DIR /B > TmpDirList.log");//å°†æ–‡ä»¶åˆ—è¡¨è¯»å…¥åˆ°logæ–‡ä»¶ä¸­
 
-	fp = fopen("TmpDirList.log","r");//¶Áµ½fp0
+	fp = fopen("TmpDirList.log","r");//è¯»åˆ°fp0
 	for( ; i < 100 ;i++)
 	{
-		if(fgets(fileList[i], 100, fp) == NULL) //¶ÁÈ¡Ò»ÐÐµ½fileList[i]
+		if(fgets(fileList[i], 100, fp) == NULL) //è¯»å–ä¸€è¡Œåˆ°fileList[i]
 			break;
-		if(strstr(fileList[i],".txt")!=NULL)//ÅÐ¶ÏÊÇ·ñÊÇtxtÎÄ¼þ
+		if(strstr(fileList[i],".txt")!=NULL)//åˆ¤æ–­æ˜¯å¦æ˜¯txtæ–‡ä»¶
 		{
-			if(row == 0)//µÚÒ»ÐÐÏÔÊ¾µÄÄÚÈÝ
-				printf("µ±Ç°Ä¿Â¼ÏÂÓÐÒÔÏÂÎÄ±¾ÎÄµµ£º\n");
+			if(row == 0)//ç¬¬ä¸€è¡Œæ˜¾ç¤ºçš„å†…å®¹
+				printf("å½“å‰ç›®å½•ä¸‹æœ‰ä»¥ä¸‹æ–‡æœ¬æ–‡æ¡£ï¼š\n");
 			row++;
-			strcpy(List[row].Name,fileList[i]);//½«txtÎÄ¼þÁÐ±í¸´ÖÆµ½List½á¹¹ÌåÖÐÈ¥
+			strcpy(List[row].Name,fileList[i]);//å°†txtæ–‡ä»¶åˆ—è¡¨å¤åˆ¶åˆ°Listç»“æž„ä½“ä¸­åŽ»
 		}
 	}
 	fclose(fp);
-	remove("TmpDirList.log");//É¾³ýÕâ¸ö´æ´¢ÎÄ¼þÁÐ±íµÄÁÙÊ±ÎÄ¼þ
+	remove("TmpDirList.log");//åˆ é™¤è¿™ä¸ªå­˜å‚¨æ–‡ä»¶åˆ—è¡¨çš„ä¸´æ—¶æ–‡ä»¶
 
 	return row;
 }
 
 /**************************************************************************************************
-º¯ÊýÓÃÍ¾£º´òÓ¡txtÎÄµµÁÐ±í
-ÊäÈë²ÎÊý£ºtxtÎÄ¼þµÄÊýÁ¿Öµ
-·µ»Ø²ÎÊý£ºÎÞ
+å‡½æ•°ç”¨é€”ï¼šæ‰“å°txtæ–‡æ¡£åˆ—è¡¨
+è¾“å…¥å‚æ•°ï¼štxtæ–‡ä»¶çš„æ•°é‡å€¼
+è¿”å›žå‚æ•°ï¼šæ— 
 */
 void PrintFileList(int row)
 {
@@ -145,32 +145,32 @@ void PrintFileList(int row)
 
 	if(row <= 0)
 	{
-		printf("(#¨F¡ä)¿¿£¬±¾Ä¿Â¼Ò»¸öÎÄ±¾ÎÄµµ£¨txtÎÄ¼þ£©¶¼Ä¾ÓÐ£¬·Ö¸î¸öÃ«Ïß°¡¡£³ÌÐòÍË³ö£¡\n");
-		system("pause");//ÈÎÒâ¼ü¼ÌÐø
-		exit(0);//½áÊø³ÌÐò
+		printf("(#â€µâ€²)é ï¼Œæœ¬ç›®å½•ä¸€ä¸ªæ–‡æœ¬æ–‡æ¡£ï¼ˆtxtæ–‡ä»¶ï¼‰éƒ½æœ¨æœ‰ï¼Œåˆ†å‰²ä¸ªæ¯›çº¿å•Šã€‚ç¨‹åºé€€å‡ºï¼\n");
+		system("pause");//ä»»æ„é”®ç»§ç»­
+		exit(0);//ç»“æŸç¨‹åº
 	}
 	else
-		for(; i <= row ; i++)//´òÓ¡txtÎÄ¼þÁÐ±í
+		for(; i <= row ; i++)//æ‰“å°txtæ–‡ä»¶åˆ—è¡¨
 			if(List[i].Name != "")
 				printf("%2d. %s",i,List[i].Name);
 }
 
 /**************************************************************************************************
-º¯ÊýÓÃÍ¾£ºÊäÈëÑ¡Ôñ£¬´íÎóºóÑ­»·ÌáÊ¾£¬Ö±ÖÁÊäÈëÕýÈ·
-ÊäÈë²ÎÊý£ºmin:ÔÊÐíµÄ×îÐ¡ÊäÈëÖµ£¬max:ÔÊÐíµÄ×î´óÊäÈëÖµ
-·µ»Ø²ÎÊý£ºÊäÈëµÄÖµ
+å‡½æ•°ç”¨é€”ï¼šè¾“å…¥é€‰æ‹©ï¼Œé”™è¯¯åŽå¾ªçŽ¯æç¤ºï¼Œç›´è‡³è¾“å…¥æ­£ç¡®
+è¾“å…¥å‚æ•°ï¼šmin:å…è®¸çš„æœ€å°è¾“å…¥å€¼ï¼Œmax:å…è®¸çš„æœ€å¤§è¾“å…¥å€¼
+è¿”å›žå‚æ•°ï¼šè¾“å…¥çš„å€¼
 */
 int ReScanf(int min,int max)
 {
 	int select;
 
 	fflush(stdin);
-	scanf("%d",&select);    //ÊäÈëÑ¡Ôñ
+	scanf("%d",&select);    //è¾“å…¥é€‰æ‹©
 	while( select > max || select < min )
 	{
-		printf("\nÊäÈëÓÐÎó,ÇëÊäÈë%d-%dÖ®¼äµÄÊý×Ö: ",min,max);
+		printf("\nè¾“å…¥æœ‰è¯¯,è¯·è¾“å…¥%d-%dä¹‹é—´çš„æ•°å­—: ",min,max);
 		fflush(stdin);
-		scanf("%d",&select);    //ÊäÈëÑ¡Ôñ
+		scanf("%d",&select);    //è¾“å…¥é€‰æ‹©
 	}
 
 	return select;
