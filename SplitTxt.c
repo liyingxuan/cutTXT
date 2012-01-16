@@ -1,19 +1,7 @@
 ﻿#include <stdio.h>
 #include <stdlib.h>
-//#include <conio.h>
 #include <string.h>
-
-/*全局结构体数组*/
-struct NameListStruct
-{
-	char Name[100];	
-}List[100];
-
-/*函数申明*/
-void Show(void);//显示一些特定信息
-int ReadFileList(void);//读取exe文件所在目录的文件列表，并筛选出txt文档，放入全局的结构体数组中
-void PrintFileList(int row);//txt文档列表
-int ReScanf(int min,int max);//输入选择，错误后循环提示，直至输入正确
+#include "SplitTxt.h"
 
 /**************************************************************************************************
 函数用途：main函数，程序入口；读取txt列表，并分割选中的文件
